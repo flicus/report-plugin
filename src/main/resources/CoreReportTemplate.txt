@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 public class %1$s extends AbstractReport {
 
-    public void executeInternal() {
+    public void executeInternal() throws Throwable {
 %2$s
     }
 }
