@@ -86,7 +86,7 @@ public class CreateReport extends DefaultTask {
         } catch (Throwable e) {
             throw new IllegalStateException("buildTemplate:: caught: " + e.getMessage(), e);
         }
-        String resultStr = String.format(result.toString(), getReportName(), "// ### begin of the report source code ### \n\n//todo: replace with report source code\n\n// ### end of the report source code ###");
+        String resultStr = String.format(result.toString(), getReportName(), "// ### begin of the report source code ### !!!!!! do not remove this line, keep it first line of the report script !!!!! \n\n//todo: replace with report source code\n\n// ### end of the report source code ### !!!!!! do not remove this line, keep it the last line of the report script !!!!!");
         return resultStr;
     }
 
