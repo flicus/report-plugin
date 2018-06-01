@@ -68,7 +68,7 @@ public class ProcessReports extends DefaultTask {
 
     private Stream<File> getFiles(String ext) {
         try {
-            return Files.walk(getProject().getProjectDir().toPath()).map(path -> path.toFile()).filter(file -> file.isFile() && file.getName().endsWith(ext));
+            return Files.walk(input.toPath()).map(path -> path.toFile()).filter(file -> file.isFile() && file.getName().endsWith(ext));
         } catch (IOException e) {
             e.printStackTrace();
         }
