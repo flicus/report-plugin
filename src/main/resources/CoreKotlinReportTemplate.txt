@@ -13,8 +13,7 @@ import org.apache.log4j.Logger;
 
 
 class %1$s : AbstractReport() {
-
-    public override fun executeInternal() throws Throwable {
+    override fun executeInternal() {
 %2$s
     }
 }
