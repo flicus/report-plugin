@@ -53,13 +53,13 @@ public class ProcessReports extends DefaultTask {
         writer.close();
     }
 
-    private void process(BufferedWriter writer, AtomicInteger id, File file, int type) {
+    private void process(BufferedWriter writer, AtomicInteger id, File file, int language) {
         try {
             System.out.println("### Processing: " + file.getName());
             String report = getReportName(file);
             String reportSrc = getReportSrc(file);
-            // reportId, code, name, classname, src, languageid
-            writer.write(String.format(record, /*id.getAndIncrement(),*/ report, report, report, reportSrc, type));
+            //  code, name, classname, src, languageid
+            writer.write(String.format(record, /*id.getAndIncrement(),*/ report, report, report, reportSrc, language));
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,7 +72,7 @@ public class ProcessReports extends DefaultTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Arrays.asList(new File[]{}).stream();
+        return Arrays.asList().stream();
     }
 
     private String getReportName(File file) {
