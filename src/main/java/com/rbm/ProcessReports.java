@@ -72,7 +72,7 @@ public class ProcessReports extends DefaultTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Arrays.asList().stream();
+        return Arrays.asList(new File[]{}).stream();
     }
 
     private String getReportName(File file) {
