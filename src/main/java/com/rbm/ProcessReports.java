@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 public class ProcessReports extends DefaultTask {
 
-    private static final String record = "INSERT INTO REPORT_ENTITY (REPORTID, TYPEID, CODE, NAME, ISACTIVE, CLASSNAME, COMPILEDCLASS, NOTE, SRC, LANGUAGEID) VALUES (%d, 1, '%s', '%s', true, '%s', '', '', '%s', %d);";
+    private static final String record = "INSERT INTO REPORT_ENTITY (TYPE, CODE, NAME, CLASSNAME, SRC, LANGUAGE) VALUES (1, '%s', '%s', '%s', '%s', %d);";
 
     @InputDirectory
     private File input;
@@ -58,7 +58,7 @@ public class ProcessReports extends DefaultTask {
             String report = getReportName(file);
             String reportSrc = getReportSrc(file);
             // reportId, code, name, classname, src, languageid
-            writer.write(String.format(record, id.getAndIncrement(), report, report, report, reportSrc, type));
+            writer.write(String.format(record, /*id.getAndIncrement(),*/ report, report, report, reportSrc, type));
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
