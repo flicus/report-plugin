@@ -6,6 +6,7 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -66,11 +67,18 @@ public class ProcessReports extends DefaultTask {
     }
 
     private Stream<File> getFiles(String ext) {
-        return Arrays.asList(getProject().getBuildDir().listFiles((dir, name) -> name.endsWith(ext))).stream();
+        try {
+            return Files.walk(input.toPath()).map(path -> path.toFile()).filter(file -> file.isFile() && file.getName().endsWith(ext));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Arrays.asList(new File[]{}).stream();
     }
 
     private String getReportName(File file) {
-        return file.getName().replace(".java", "");
+        return file.getName().endsWith(".java")
+                ? file.getName().replace(".java", "")
+                : file.getName().replace(".kt", "");
     }
 
     private String getReportSrc(File file) throws IOException {
