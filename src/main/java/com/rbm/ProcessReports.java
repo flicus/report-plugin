@@ -58,7 +58,7 @@ public class ProcessReports extends DefaultTask {
             System.out.print("### Processing: " + file.getName());
             String report = getReportName(file);
             String reportSrc = getReportSrc(file);
-            if (reportSrc.contains("//@skip")) {
+            if (reportSrc == null) {
                 System.out.println(" ... skip");
             } else {
                 //  code, name, classname, src, languageid
@@ -93,7 +93,9 @@ public class ProcessReports extends DefaultTask {
         boolean endFound = false;
         while (reader.ready()) {
             String line = reader.readLine();
-            if (line.contains("### begin")) {
+            if (line.contains("//@skip")) {
+                return null;
+            } else if (line.contains("### begin")) {
                 startFound = true;
             } else if (line.contains("### end")) {
                 endFound = true;
