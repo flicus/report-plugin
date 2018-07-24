@@ -55,12 +55,17 @@ public class ProcessReports extends DefaultTask {
 
     private void process(BufferedWriter writer, AtomicInteger id, File file, int language) {
         try {
-            System.out.println("### Processing: " + file.getName());
+            System.out.print("### Processing: " + file.getName());
             String report = getReportName(file);
             String reportSrc = getReportSrc(file);
-            //  code, name, classname, src, languageid
-            writer.write(String.format(record, /*id.getAndIncrement(),*/ report, report, report, reportSrc, language));
-            writer.newLine();
+            if (reportSrc.contains("//@skip")) {
+                System.out.println(" ... skip");
+            } else {
+                //  code, name, classname, src, languageid
+                writer.write(String.format(record, /*id.getAndIncrement(),*/ report, report, report, reportSrc, language));
+                writer.newLine();
+                System.out.println(" ... done");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
